@@ -26,7 +26,16 @@
  *
  */
 function getComposition(f,g) {
-    throw new Error('Not implemented');
+        let fun1 = g;
+        let fun2 = f;
+        function inner(...args) {
+          let k = fun1(...args);
+          let r = fun2(k);
+          return r;
+        }
+        
+        return inner;
+
 }
 
 
@@ -47,7 +56,10 @@ function getComposition(f,g) {
  *
  */
 function getPowerFunction(exponent) {
-    throw new Error('Not implemented');
+    function inner(x) {
+        return Math.pow(x, exponent);
+    }
+    return inner;
 }
 
 
@@ -149,8 +161,12 @@ function logger(func, logFunc) {
  *   partialUsingArguments(fn, 'a','b','c')('d') => 'abcd'
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
-function partialUsingArguments(fn) {
-    throw new Error('Not implemented');
+function partialUsingArguments(fn, ...args) {
+    let func1 = fn;
+    function inner(...str) {
+        return func1(...args, ...str);
+    }
+    return inner;
 }
 
 

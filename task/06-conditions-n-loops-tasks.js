@@ -30,7 +30,15 @@
  *
  */
 function getFizzBuzz(num) {
-    throw new Error('Not implemented');
+    if (num % 3 == 0 && num % 5 == 0) {
+        return 'FizzBuzz';
+    } else if (num % 3 == 0) {
+        return 'Fizz';
+    } else if (num % 5 == 0) {
+        return 'Buzz';
+    } else {
+        return num;
+    }
 }
 
 
@@ -46,7 +54,10 @@ function getFizzBuzz(num) {
  *   10 => 3628800
  */
 function getFactorial(n) {
-    throw new Error('Not implemented');
+    if (n == 1) {
+        return 1;
+      }
+      return n * getFactorial(n - 1);
 }
 
 
@@ -63,7 +74,11 @@ function getFactorial(n) {
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
 function getSumBetweenNumbers(n1, n2) {
-    throw new Error('Not implemented');
+    let sum;
+    for (sum = 0; n1 <= n2; n1++) {
+        sum += n1;
+    }
+    return sum;
 }
 
 
@@ -82,7 +97,11 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,10,10 =>  true
  */
 function isTriangle(a,b,c) {
-    throw new Error('Not implemented');
+    if (a < b + c && b < a + c && c < a + b) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 
@@ -192,7 +211,23 @@ function findFirstSingleChar(str) {
  *
  */
 function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
-    throw new Error('Not implemented');
+    let brack1;
+    let brack2;
+    if (isStartIncluded) {
+        brack1 = '[';
+    } else {
+        brack1 = '(';
+    }
+    if (isEndIncluded) {
+        brack2 = ']';
+    } else {
+        brack2 = ')'
+    }
+    if (a > b) {
+        return `${brack1}${b}, ${a}${brack2}`;
+    } else {
+        return `${brack1}${a}, ${b}${brack2}`;
+    }
 }
 
 
@@ -209,7 +244,7 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
  * 'noon' => 'noon'
  */
 function reverseString(str) {
-    throw new Error('Not implemented');
+    return str.split('').reverse().join('');
 }
 
 
@@ -226,7 +261,13 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
-    throw new Error('Not implemented');
+    let str = '' + num;
+    let arr = [];
+    for (let i = str.length; i >= 0; i--) {
+        arr.push(str[i]);
+    }
+    str = arr.join('');
+    return Number(str);
 }
 
 
@@ -251,7 +292,24 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
-    throw new Error('Not implemented');
+    ccn = '' + ccn;
+    ccn = ccn.split('').reverse().map( item => parseInt(item));
+    ccn = ccn.map( (item, i) => {
+        if (i % 2) {
+            return item * 2;
+        } else { 
+            return item;
+        }
+    });
+    ccn = ccn.map(item => {
+        if (item > 9) {
+            return (item % 10 + 1);
+        } else {
+            return item;
+        }
+    });
+    ccn = ccn.reduce((acc, curr) => { return acc += curr});
+    return ccn % 10 === 0;
 }
 
 
@@ -270,7 +328,22 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-    throw new Error('Not implemented');
+    const result = [];
+  let sum = 0;
+  const arr = String(num);
+  const str = arr.split('');
+	const numbers = str.map(Number);
+  if (arr.length > 1) {
+    for (let i = 0; i < arr.length; i++) {
+      sum += numbers[i];
+    }
+  } 
+	if (sum >= 10) {
+    result.push(sum);
+    return  getDigitalRoot(result);
+  } else {
+    return sum;
+  }
 }
 
 
@@ -296,7 +369,27 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true 
  */
 function isBracketsBalanced(str) {
-    throw new Error('Not implemented');
+    const arr = str.split('');
+    let bracketsConfig = [['[', ']'],['{', '}'], ['(', ')'], ['<', '>']];
+    let row = 0;
+    while (row < arr.length) {
+      for (let r = 0; r < bracketsConfig.length; r++) {
+          let open = bracketsConfig[r][0];
+          let close = bracketsConfig[r][1];
+          if (arr[row] === open) {
+            if(arr[row + 1] === close){
+              arr.splice(row, 2);
+              row -= 2;
+            }
+          } 
+        }
+      row++;
+    }
+    if (arr.length === 0){
+      return true;
+    } else {
+      return false;
+    }
 }
 
 
@@ -356,7 +449,7 @@ function timespanToHumanString(startDate, endDate) {
  *    365, 10 => '365'
  */
 function toNaryString(num, n) {
-    throw new Error('Not implemented');
+    return num.toString(n);
 }
 
 
