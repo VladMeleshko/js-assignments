@@ -266,7 +266,11 @@ function toArrayOfSquares(arr) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
 function getMovingSum(arr) {
-   throw new Error('Not implemented');
+   let sum = 0;
+   const res = arr.map(item => {
+      return sum+= item;
+   });
+   return res;
 }
 
 /**
@@ -521,7 +525,12 @@ function getIdentityMatrix(n) {
  *     3, 3   => [ 3 ]
  */
 function getIntervalArray(start, end) {
-   throw new Error('Not implemented');
+   let arr = new Array(end - start + 1);
+   start = start - 1;
+   return [...arr].map(function (item) {
+      start++;
+      return start;
+   })
 }
 
 /**
